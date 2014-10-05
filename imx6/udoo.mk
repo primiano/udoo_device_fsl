@@ -51,5 +51,4 @@ PRODUCT_PACKAGES += \
 	iwconfig \
 	iwlist \
 	setotg \
-	ESFileExplorer \
 	lsusb
