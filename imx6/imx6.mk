@@ -91,7 +91,6 @@ PRODUCT_PACKAGES += \
 	copybit.imx6				\
 	hwcomposer.imx6				\
 	camera.imx6				\
-	power.imx6				\
 	audio.r_submix.default			\
 	libbt-vendor				\
 	magd
