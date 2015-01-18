@@ -51,4 +51,5 @@ PRODUCT_PACKAGES += \
 	iwconfig \
 	iwlist \
 	setotg \
-	lsusb
+	lsusb \
+	home_automation

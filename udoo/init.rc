@@ -140,13 +140,24 @@ on boot
     chown system system /sys/devices/virtual/gpio/gpio203/value
     chmod 0666 /sys/devices/virtual/gpio/gpio203/direction
     chown system system /sys/devices/virtual/gpio/gpio203/direction
-    
+    write /sys/class/gpio/gpio203/direction "out"
+    write /sys/class/gpio/gpio203/value 0
+    write /sys/class/gpio/gpio128/direction "out"
+    write /sys/class/gpio/gpio128/value 0
+
     chmod 0666 /sys/module/usbtouchscreen/parameters/calibration
     chown system system /sys/module/usbtouchscreen/parameters/calibration
     exec /system/bin/cat /data/data/com.udoo.touchscreencalibration/files/pointercal > /sys/module/usbtouchscreen/parameters/calibration
 
 # mount the debugfs
     mount debugfs none /sys/kernel/debug/
+
+# Home automation daemon (svc runs as another user. chown data to root to be read-only from www daemon)
+  mkdir /data/home_automation 0775 shell shell
+  chown root /data/home_automation
+  chmod 0775 /data/home_automation
+  # Make the board backlight world writable.
+  chmod 0666 /sys/class/leds/pwm3/brightness
 
 service p2p_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dwext -c/data/misc/wifi/wpa_supplicant.conf
@@ -178,6 +189,11 @@ service iprenew_wlan0 /system/bin/dhcpcd -n
     class late_start
     disabled
     oneshot
+
+service home_automation /system/bin/home_automation /dev/ttymxc3 /data/home_automation
+    class late_start
+    user home_aut
+    group inet
     
 on fs
 # mount ext4 partitions
