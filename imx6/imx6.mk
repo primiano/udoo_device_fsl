@@ -14,7 +14,7 @@ PRODUCT_PACKAGES += \
 	Gallery		    			\
 	SoundRecorder				\
 	Camera					\
-        LegacyCamera                            \
+	LegacyCamera					\
 	Email					\
 	FSLOta					\
 	CactusPlayer                            \
@@ -331,7 +331,8 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # for property
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 	persist.sys.usb.config=mtp \
-	persist.sys.strictmode.disable=1
+	persist.sys.strictmode.disable=1 \
+	service.adb.tcp.port=5555
 
 PRODUCT_DEFAULT_DEV_CERTIFICATE := \
         device/fsl/common/security/testkey
